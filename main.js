@@ -29,7 +29,27 @@
         // td取得＆ボタン追加
         const td = tr.getElementsByClassName('status')[0]
         td.appendChild(button);
-        //todo: 課題3-3でここに、ステータスボタンをクリックすると作業中⇔完了とするイベント追加
+        
+        button.addEventListener('click', () => {
+            // 削除ボタンを押されたタスクのIDとStatusを取得
+            const id = tr.getElementsByClassName('id')[0].textContent;
+            const status = button.textContent;
+            const complete = "完了";
+            const working = "作業中";
+
+            // ブラウザ上の表示とtasks配列のstatusを、作業中⇔完了で変更
+            switch (status) {
+                case working:
+                    tasks[id].status = complete;
+                    button.textContent = complete;
+                    break;
+                    
+                case complete:
+                    tasks[id].status = working;
+                    button.textContent = working;                    
+                    break;
+            }
+        });
     }
 
     // 削除ボタンを生成する関数
